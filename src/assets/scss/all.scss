@@ -1,0 +1,153 @@
+@import "reset";
+@import "font";
+@import "hamburger";
+
+@import '~@fullcalendar/core/main.css';
+@import '~@fullcalendar/daygrid/main.css';
+@import '~@fullcalendar/list/main.css';
+
+*{
+  box-sizing: border-box;
+}
+
+* {
+  font-family: "MyriadPro", "FangSong", "Microsoft JhengHei", "微軟正黑體", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html, body {
+  height: 100%;
+}
+
+html {
+  font-size: 14px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold;
+  font-family: "Bonkers", "PingFang", "Microsoft JhengHei", "微軟正黑體", sans-serif;
+}
+
+.default-bg {
+  background-image: url(~@/assets/images/background.png);
+  background-size: cover;
+  background-attachment: fixed;
+
+  width: 100%;
+  height: 100%;
+}
+
+.default-page {
+  padding-top: 100px;
+}
+
+.page-title {
+  padding: 100px 0;
+  position: relative;
+  opacity: 0;
+  h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+
+    color: #230A59;
+    opacity: 0;
+    // transition: opacity 1s;
+  }
+  img {
+    width: 100px;
+    position: absolute;
+    left: 50%;
+    top: 70px;
+    margin-left: -50px;
+    transition: opacity 1s;
+    opacity: 0.6;
+    &:hover {
+      opacity: 0;
+    }
+    &:hover ~h1 {
+      opacity: 1;
+    }
+  }
+}
+
+.container {
+  width: 90%;
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.tabs {
+  width: 90%;
+  max-width: 980px;
+  margin: 30px auto;
+
+  display: flex;
+  justify-content: center;
+  a {
+    font-size: 1.5rem;
+    margin: 0 50px;
+    &.active {
+      font-weight: bold;
+    }
+  }
+}
+
+.fc-button-primary {
+  background-color: transparent;
+  border: none;
+  &:focus {
+    box-shadow: none;
+  }
+}
+
+// Full calendar
+.comp-full-calendar {
+  background: transparent;
+}
+.full-calendar-body .dates {
+  background: #ffffff88;
+}
+.full-calendar-body .dates .week-row .day-cell.today {
+  background: #fcf8e3aa;
+}
+.full-calendar-header .header-center {
+  position: relative;
+  font-size: 1.5rem;
+}
+.full-calendar-header .header-center .prev-month, .full-calendar-header .header-center .next-month {
+  position: absolute;
+}
+.full-calendar-header .header-center .prev-month {
+  left: 100px;
+}
+.full-calendar-header .header-center .next-month {
+  right: 100px;
+}
+
+@media screen and (max-width: 768px) {
+  .default-bg {
+    background-size: 100% auto;
+  }
+  .page-title {
+    padding: 80px 0;
+    h1 {
+      font-size: 1.6rem;
+      opacity: 1;
+    }
+    img {
+      opacity: 0;
+    }
+  }
+  .tabs {
+    width: 100%;
+    margin: 10px 0;
+    flex-direction: column;
+    text-align: center;
+    a {
+      font-size: 1.5rem;
+      line-height: 2rem;
+    }
+  }
+}

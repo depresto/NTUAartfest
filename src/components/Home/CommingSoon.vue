@@ -1,0 +1,142 @@
+<template>
+  <div id="comming-soon">
+    <div class="page-title">
+      <img src="/logo-white.png" alt="">
+      <h1>敬請期待</h1>
+    </div>
+
+    <swiper :options="swiperOption" v-view>
+      <swiper-slide v-for="(item, index) in works" :key="index">
+        <div class="image" :style="{ backgroundImage: 'url(' + item.img + ')' }"></div>
+        <div class="text">
+          <h1>{{item.title}}</h1>
+          <h2>{{item.subtitle}}</h2>
+        </div>
+      </swiper-slide>
+    </swiper>
+  </div>
+</template>
+
+<style lang="scss">
+#comming-soon {
+  .page-title {
+    padding-bottom: 50px;
+  }
+  .swiper-slide {
+    position: relative;
+    height: 100%;
+    img {
+      width: 100%;
+    }
+    .image {
+      width: 100%;
+      height: 0;
+      padding-bottom: 100%;
+
+      background-size: cover;
+      background-position: center center;
+    }
+    .text {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,.5);
+      opacity: 0;
+      transition: 1s;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+    h1 {
+      text-align: right;
+      font-size: 17px;
+      opacity: 0.7;
+      margin-right: 10px;
+      margin-bottom: 5px;
+      color: $white;
+    }
+    h2 {
+      text-align: right;
+      font-size: 14px;
+      opacity: 0.7;
+      margin-right: 10px;
+      margin-bottom: 10px;
+      color: $white;
+      font-weight: normal;
+    }
+  }
+}
+@media screen and (max-width: 768px){
+  #comming-soon {
+    .view-in--full {
+      .swiper-slide {
+        .text {
+          transition: 2s;
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
+</style>
+
+<script>
+import 'swiper/dist/css/swiper.css'
+import { swiper, swiperSlide } from 'vue-awesome-swiper'
+
+export default {
+  components: { 
+    swiper,
+    swiperSlide
+  },
+  data() {
+    return {
+      swiperOption: {
+        slidesPerView: 4,
+        spaceBetween: 0,
+        freeMode: true,
+        loop: true,
+        centeredSlides: true,
+        breakpoints: {
+          768: {
+            slidesPerView: 'auto',
+          },
+        }
+      },
+      works: [{
+        img: "/comming-soon/1.jpg",
+        title: "時常",
+        subtitle: "9/15(四) 台藝大體育館"
+      },{
+        img: "/comming-soon/2.jpg",
+        title: "FORZEN DANCE",
+        subtitle: "GRACE SCHWINDT"
+      },{
+        img: "/comming-soon/3.jpeg",
+        title: "FORZEN DANCE",
+        subtitle: "GRACE SCHWINDT"
+      },{
+        img: "/comming-soon/4.jpg",
+        title: "FORZEN DANCE",
+        subtitle: "GRACE SCHWINDT"
+      },{
+        img: "/comming-soon/1.jpg",
+        title: "FORZEN DANCE",
+        subtitle: "GRACE SCHWINDT"
+      },{
+        img: "/comming-soon/2.jpg",
+        title: "FORZEN DANCE",
+        subtitle: "GRACE SCHWINDT"
+      }]
+    }
+  }
+}
+</script>

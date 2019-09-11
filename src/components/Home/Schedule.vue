@@ -1,0 +1,262 @@
+<template>
+  <section id="schedule" class="section">
+    <div class="page-title">
+      <img src="/logo-white.png" alt="">
+      <h1>時程表</h1>
+    </div>
+
+    <transition name="fade">
+      <div class="forcast" v-if="event">
+        <div
+          class="active-img"
+          :style="{ 'background-image': 'url(' + bg + ')' }"
+        >
+        </div>
+        <a v-if="link" :href="link" class="btn">前往報名</a>
+        <div><h2>{{event}}</h2></div>
+        <div v-if="place">地點 {{place}}</div>
+        <div v-if="time">時間  {{time}}</div>
+        <div v-if="intro">{{intro}}</div>
+        <div @click="close" class="close">x</div>
+      </div>
+    </transition>
+
+    <div class="container calendar" @mousedown="onFormClick">
+      <FullCalendar v-responsive.sm.xs.md
+                    :header="{ 
+                      left:   'prev',
+                      center: 'title',
+                      right:  'next'}"
+                    :events="fcEvents"
+                    @eventClick="eventClick"
+                    :plugins="calendarPlugins"
+                    defaultView="listMonth"
+                    @dayClick="dayClick" 
+                    locale="en" 
+                    firstDay="1"></FullCalendar>
+      <FullCalendar v-responsive.lg.xl 
+                    :header="{ 
+                      left:   'prev',
+                      center: 'title',
+                      right:  'next'}"
+                    :events="fcEvents"
+                    @eventClick="eventClick"
+                    :plugins="calendarPlugins"
+                    defaultView="dayGridMonth"
+                    @dayClick="dayClick" 
+                    locale="en" 
+                    firstDay="1"></FullCalendar>
+    </div>
+  </section>
+</template>
+
+<script>
+import FullCalendar from '@fullcalendar/vue'
+import listPlugin from '@fullcalendar/list';
+import dayGridPlugin from '@fullcalendar/daygrid'
+
+const demoEvents = [
+  {
+    title: '拾光隧道',
+    start: '2018-05-04',
+    cssClass: ['persian', 'bg'],
+    time: '14:00-21:00',
+    place: '圖資系館至活大前',
+    intro: '表演卡司：臺大嘻哈文化研究社 / Tomboyz (北醫熱舞社) / 臺大流行音樂歌唱社 / 儀隊旗隊 / 林正 / 郭真榕 Candle Kuo x 光暈者 The Glows / 好樂團 / 告五人',
+  },
+  {
+    title: 'Back in Time',
+    start: '2018-05-04',
+    cssClass: ['persian', 'bg'],
+    time: '18:20-21:00',
+    place: '振興草皮（遇雨改至怡仁堂）',
+  },
+  {
+    title: '大台北藝術節記者會',
+    start: '2019-08-28',
+    cssClass: ['persian', 'bg'],
+    time: '18:20-21:00',
+    place: '',
+  }
+];
+function preloaderBg(img) {
+  return `url(${img}) no-repeat -9999px -9999px`;
+}
+export default {
+  created() {
+    const dom = document.createElement('div');
+    const background = demoEvents.map(evt => preloaderBg(evt.bg)).join(',');
+    dom.style.background = background;
+    document.body.appendChild(dom);
+  },
+  data() {
+    return {
+      calendarPlugins: [ dayGridPlugin, listPlugin ],
+      fcEvents: demoEvents,
+      event: '',
+      place: '',
+      time: '',
+      bg: '',
+      link: '',
+      intro: '',
+    };
+  },
+  extends: {
+    components: {
+      FullCalendar,
+    },
+  },
+  methods: {
+    onFormClick: function (e) {
+      if (e.stopPropagation) {e.stopPropagation();}
+      else {e.cancelBubble=true;}
+
+      return false;
+    },
+    eventClick(event) {
+      this.event = event.event.title;
+      this.place = event.event.place;
+      this.time = event.event.time;
+      this.bg = event.event.bg;
+      this.link = event.event.link;
+      this.intro = event.event.intro;
+    },
+    dayClick() {
+      this.event = '';
+    },
+    close() {
+      this.event = null;
+    },
+    // esc() {
+    //   if (event.key === 'Enter') {
+    //     console.log('enter key was pressed!');
+    //   }
+    // },
+  },
+};
+</script>
+
+
+<style lang="scss">
+  #schedule {
+    .page-title {
+      padding-bottom: 50px;
+    }
+    .container {
+      width: 90%;
+      margin: 0 auto;
+    }
+  }
+  .section {
+    // height: 600px;
+    width: 100%;
+    margin-top: 60px;
+    position: relative;
+  }
+  .forcast {
+    position: absolute;
+    top: 40%;
+    width: 400px;
+    height: 240px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    background: #E4EDEE;
+    z-index: 3;
+    text-align: left;
+    padding: 20px;
+    padding-left: 180px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.18);
+  }
+  .active-img {
+    width: 140px;
+    height: 140px;
+    position: absolute;
+    left: 20px;
+    top: 20px;
+  }
+  .btn {
+    background: #fff;
+    padding: 0.4em 0.5em;
+    display: inline-block;
+    position: absolute;
+    bottom: 30px;
+    left: 30px;
+    width: 120px;
+    text-align: center;
+    cursor: pointer;
+  }
+  .close {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    cursor: pointer;
+  }
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .3s;
+  }
+  .fade-enter, .fade-leave-to {
+    opacity: 0;
+  }
+  @media only screen and (max-width: 768px) {
+    .forcast {
+      width: 320px;
+    }
+    #schedule {
+      .container {
+        width: 100%;
+        .full-calendar-header .header-center {
+          font-size: 1.2rem;
+        }
+        .full-calendar-header .header-center .prev-month {
+          left: 0;
+        }
+        .full-calendar-header .header-center .next-month {
+          right: 0;
+        }
+      }
+    }
+  }
+</style>
+
+<style lang="scss">
+  .purple {
+    color: #A40D5E !important;
+  }
+  .darkgreen {
+    color: #00A29A !important;
+  }
+  .orange {
+    color: #F39800 !important;
+  }
+  .green {
+    color: #15AE67 !important;
+  }
+  .blue {
+    color: #056FB8 !important;
+  }
+  .red {
+    color: #C30F23 !important;
+  }
+  .persian {
+    color: #3922DD !important;
+  }
+  .crete {
+    color: #567A29 !important;
+  }
+  .turmeric {
+    color: #CFB94A !important;
+  }
+  .comp-full-calendar {
+    max-width: 1280px !important;
+  }
+  .more-events {
+    z-index: 2 !important;
+  }
+  .full-calendar-body 
+    .dates
+      .more-events
+        .more-body {
+          background: #fff;
+        }
+</style>
