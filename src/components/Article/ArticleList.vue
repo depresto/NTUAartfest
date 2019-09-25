@@ -7,7 +7,9 @@
       <li v-for="(item, index) in news_list" :key="index">
         <router-link :to="{ name: 'articlepage', params: { id: item.id } }">
           <div class="title">{{item.fields.Name}}</div>
-          <div class="description">{{item.fields.Content}}</div>
+          <div class="description">
+            <div v-html="item.fields.Content"></div>
+          </div>
         </router-link>
       </li>
     </ul>
@@ -32,6 +34,7 @@ export default {
 <style lang="scss">
 .article-list {
   margin-bottom: 50px;
+  position: relative;
   ul {
     h3 {
       font-size: 2rem;

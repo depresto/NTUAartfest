@@ -11,7 +11,9 @@
         <div class="content">
           <img class="feature" :src="news.fields.Image" alt="">
 
-          <div class="text">{{news.fields.Content}}</div>
+          <div class="text">
+            <div v-html="news.fields.Content"></div>
+          </div>
         </div>
 
         <Sidebar :category="news.fields.Type"></Sidebar>
@@ -39,6 +41,7 @@ export default {
 
 <style lang="scss">
 #article-page {
+  position: relative;
   .title-area {
     margin: 40px 0;
     h1 {

@@ -8,7 +8,7 @@
           <div class="text">
             <h1>{{item.fields.Name}}</h1>
             <div class="description">
-              <p>{{item.fields.Content}}</p>
+              <div v-html="item.fields.Content"></div>
             </div>
           </div>
         </router-link>
