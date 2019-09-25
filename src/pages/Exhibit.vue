@@ -5,7 +5,7 @@
     <div class="container">
 
       <div class="main">
-        <div class="content">
+        <div class="content" v-if="artist">
           <div class="title-area">
             <h1>{{artist.fields.ArtistName}}</h1>
           </div>
@@ -61,6 +61,7 @@ export default {
   padding-bottom: 100px;
   .title-area {
     margin: 40px 0;
+    display: block;
     h1 {
       font-size: 3rem;
       margin-bottom: 10px;
@@ -76,6 +77,8 @@ export default {
       vertical-align: top;
     }
     .content {
+      position: relative;
+      z-index: 10;
       width: 70%;
       padding-right: 20px;
       .feature {

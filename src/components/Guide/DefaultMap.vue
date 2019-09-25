@@ -66,7 +66,7 @@ export default {
   },
   data() {
     return {
-      map: '/map.png',
+      map: 'https://i.imgur.com/Q7c4Kao.png',
       place: placeData,
       filter: '',
     };

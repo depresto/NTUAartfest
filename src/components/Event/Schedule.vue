@@ -22,7 +22,7 @@
                       left:   'prev',
                       center: 'title',
                       right:  'next'}"
-                    :events="fcEvents"
+                    :events="events"
                     @eventClick="eventClick"
                     :plugins="calendarPlugins"
                     defaultView="listMonth"
@@ -34,7 +34,7 @@
                       left:   'prev',
                       center: 'title',
                       right:  'next'}"
-                    :events="fcEvents"
+                    :events="events"
                     @eventClick="eventClick"
                     :plugins="calendarPlugins"
                     defaultView="dayGridMonth"
@@ -46,48 +46,20 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import FullCalendar from '@fullcalendar/vue'
 import listPlugin from '@fullcalendar/list';
 import dayGridPlugin from '@fullcalendar/daygrid'
 
-const demoEvents = [
-  {
-    title: '拾光隧道',
-    start: '2018-05-04',
-    cssClass: ['persian', 'bg'],
-    time: '14:00-21:00',
-    place: '圖資系館至活大前',
-    intro: '表演卡司：臺大嘻哈文化研究社 / Tomboyz (北醫熱舞社) / 臺大流行音樂歌唱社 / 儀隊旗隊 / 林正 / 郭真榕 Candle Kuo x 光暈者 The Glows / 好樂團 / 告五人',
-  },
-  {
-    title: 'Back in Time',
-    start: '2018-05-04',
-    cssClass: ['persian', 'bg'],
-    time: '18:20-21:00',
-    place: '振興草皮（遇雨改至怡仁堂）',
-  },
-  {
-    title: '大台北藝術節記者會',
-    start: '2019-08-28',
-    cssClass: ['persian', 'bg'],
-    time: '18:20-21:00',
-    place: '',
-  }
-];
-function preloaderBg(img) {
-  return `url(${img}) no-repeat -9999px -9999px`;
-}
 export default {
-  created() {
-    const dom = document.createElement('div');
-    const background = demoEvents.map(evt => preloaderBg(evt.bg)).join(',');
-    dom.style.background = background;
-    document.body.appendChild(dom);
+  computed: {
+    ...mapGetters({
+      events: 'artists/getCallendarEvent'
+    })
   },
   data() {
     return {
       calendarPlugins: [ listPlugin, dayGridPlugin ],
-      fcEvents: demoEvents,
       event: '',
       place: '',
       time: '',
@@ -102,13 +74,14 @@ export default {
     },
   },
   methods: {
-    eventClick(event) {
-      this.event = event.title;
-      this.place = event.place;
-      this.time = event.time;
-      this.bg = event.bg;
-      this.link = event.link;
-      this.intro = event.intro;
+    eventClick(e) {
+      let cur_event = this.events.find(event => event.id == e.event.id);
+      this.event =  cur_event.title;
+      this.place = cur_event.place;
+      this.time = cur_event.time;
+      this.bg = cur_event.bg;
+      this.link = cur_event.link;
+      this.intro = cur_event.intro;
     },
     dayClick() {
       this.event = '';

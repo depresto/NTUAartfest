@@ -32,12 +32,14 @@
     img {
       width: 50%;
       display: inline-block;
+      z-index: 10;
     }
     > div {
       width: 50%;
       display: inline-block;
       padding: 20px 50px;
       margin-left: 20px;
+      z-index: 10;
       // background-color: #232584;
 
       p {

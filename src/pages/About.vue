@@ -30,28 +30,40 @@
     <div id="sponsor" class="container">
       <div class="deco-bg"><h1>合作單位</h1></div>
 
-      <div class="main-sponsor">
-        <img src="/about/sponsor/ntua.png" alt="">
+      <div v-for="(type, index) in sponsors['types']" :key="index">
+        <div class="deco-bg"><h2>{{type}}</h2></div>
+
+        <div class="sponsor-list">
+          <div class="sponsor" v-for="(sponsor, index) in sponsors[type]" :key="index">
+            <img :src="sponsor['Image']" :alt="sponsor['Name']">
+            <div class="sponsor-name">{{sponsor['Name']}}</div>
+          </div>
+        </div>  
       </div>
-      <div class="sponsor-list">
-        <div class="sponsor" v-for="(sponsor_url, index) in sponsor_img_urls" :key="index">
-          <img :src="`/about/sponsor/${sponsor_url}`" alt="">
+    </div>
+
+    <div id="contact-btn" class="container">
+      <button type="button" @click="showModal = true">聯絡我們</button>
+    </div>
+
+    <transition name="fade">
+      <div class="modal" v-if="showModal" @click="showModal = false">
+        <div class="modal-container default-bg" @click="clickModal">
+          <div class="container">
+            <div class="deco-bg"><h1>聯絡我們</h1></div>
+          </div>
+          <button @click="showModal = false">x</button>
+          <Contactus></Contactus>
         </div>
       </div>
-    </div>
-
-    <div class="container">
-      <div class="deco-bg"><h1>聯絡我們</h1></div>
-    </div>
-
-    <Contactus></Contactus>
+    </transition>
   </section>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 import Navbar from '@/components/Navbar.vue'
-import Contactus from '@/components/Home/Contactus.vue'
+import Contactus from '@/components/About/Contactus.vue'
 export default {
   name: "about",
   components: {
@@ -60,34 +72,33 @@ export default {
   },
   created() {
     this.$store.dispatch('team/getTeamData');
+    this.$store.dispatch('team/getSponsorData');
   },
-  computed: mapState({
-    team: state => state.team.team
-  }),
   data() {
     return {
-      sponsor_img_urls: [
-        "sponsor1.jpg",
-        "sponsor2.png",
-        "sponsor3.png",
-        "sponsor4.png",
-        "sponsor5.png",
-        "sponsor6.png",
-        "sponsor7.png",
-        "sponsor8.png",
-        "sponsor9.png",
-        "sponsor10.jpg",
-        "sponsor11.png",
-        "sponsor12.jpg",
-        "sponsor13.png",
-        "sponsor14.png",
-      ],
+      showModal: false
     }
   },
+  methods: {
+    clickModal(e) {
+      if (e.stopPropagation) {e.stopPropagation();}
+      else {e.cancelBubble=true;}
+
+      return false;
+    }
+  },
+  computed: {
+    ...mapState({
+      team: state => state.team.team
+    }),
+    ...mapGetters({
+      sponsors: 'team/getSponsors'
+    })
+  }
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .deco-bg {
   position: relative;
   > * {
@@ -106,14 +117,45 @@ export default {
     background-size: contain;
   }
 }
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal-container {
+  justify-content: center;
+  width: 600px;
+  height: 550px;
+  background-color: #fff;
+  padding: 40px 0;
+  border: 2px solid #fff;
+  position: relative;
+
+  button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 2rem;
+    background-color: transparent;
+    border: none;
+    color: #fff;
+  }
+}
 #about {
   .container {
     margin-top: 50px;
     margin-bottom: 100px;
+    position: relative;
+    z-index: 10;
     h1 {
       text-align: center;
       font-size: 2rem;
       margin: 40px 0;
+    }
+    h2 {
+      text-align: center;
+      font-size: 1.6rem;
+      margin: 30px 0;
     }
     .description {
       max-width: 600px;
@@ -140,15 +182,26 @@ export default {
     .sponsor-list {
       display: flex;
       flex-wrap: wrap;
-      justify-content: space-around;
+      justify-content: center;
+      padding-bottom: 50px;
       .sponsor {
         width: 30%;
         text-align: center;
         margin-bottom: 20px; 
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
+        
         img {
+          flex: 0 0 auto;
+          object-fit: scale-down;
           width: auto;
-          max-width: 100%;
-          max-height: 100px;
+          max-width: 200px;
+          max-height: 150px;
+        }
+        .sponsor-name {
+          margin-top: 5px;
         }
       }
     }
@@ -182,6 +235,20 @@ export default {
       }
     }
   }
+  #contact-btn {
+    padding: 100px 0 200px 0;
+    margin-bottom: 0;
+    text-align: center;
+    button {
+      font-size: 1.5rem;
+      background: transparent;
+      color: #fff;
+      padding: 15px 40px;
+      border-radius: 5px;
+      border-width: 2px;
+      border-color: #fff;
+    }
+  }
   #contact-us {
     padding-bottom: 100px;
     .page-title {
@@ -201,6 +268,9 @@ export default {
       .sponsor-list {
         .sponsor {
           width: 50%;
+          img {
+            width: 100%;
+          }
         }
       }
       .team {

@@ -40,6 +40,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .default-page {
   padding-top: 100px;
+  padding-bottom: 100px;
 }
 
 .page-title {
@@ -92,6 +93,15 @@ h1, h2, h3, h4, h5, h6 {
       font-weight: bold;
     }
   }
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
 }
 
 .fc-button-primary {

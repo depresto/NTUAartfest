@@ -3,15 +3,15 @@
     <div class="container">
       <div class="box" v-for="(item, index) in news_list" :key="index">
         <router-link :to="{ name: 'articlepage', params: { id: item.id } }">
-          <img :src="item.img" alt="">
+          <img :src="item.fields.Image" alt="">
 
           <div class="text">
-            <h1>{{item.title}}</h1>
+            <h1>{{item.fields.Name}}</h1>
             <div class="description">
-              <p>{{item.content}}</p>
+              <p>{{item.fields.Content}}</p>
             </div>
             <div class="readmore">
-              <router-link to="">Read More...</router-link>
+              <router-link :to="{ name: 'articlepage', params: { id: item.id } }">Read More...</router-link>
             </div>
           </div>
         </router-link>
@@ -24,6 +24,7 @@
 #news-default {
   padding-top: 30px;
   padding-bottom: 50px;
+  min-height: 100vh;
   .container {
     display: flex;
     flex-direction: row;
@@ -89,25 +90,10 @@
 
 <script>
 export default {
-  data() {
-    return {
-      news_list: [{
-        id: "1",
-        img: "/news/news.jpg",
-        title: "失常",
-        content: "時果似無，有可也氣排說處父一口算的接正層港難國一是廣春選國打阿適活我上是的決慢一習除公趣銷水前，面在是聞過外打大沒林半害畫"
-      },{
-        id: "1",
-        img: "/news/news.jpg",
-        title: "失常",
-        content: "時果似無，有可也氣排說處父一口算的接正層港難國一是廣春選國打阿適活我上是的決慢一習除公趣銷水前，面在是聞過外打大沒林半害畫"
-      },{
-        id: "1",
-        img: "/news/news.jpg",
-        title: "失常",
-        content: "時果似無，有可也氣排說處父一口算的接正層港難國一是廣春選國打阿適活我上是的決慢一習除公趣銷水前，面在是聞過外打大沒林半害畫"
-      }]  
-    }
-  },
+  computed: {
+    news_list: function () {
+      return this.$store.getters['artists/getNewsByType'](this.$route.params.category);
+    },
+  }
 }
 </script>

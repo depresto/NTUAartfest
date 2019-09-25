@@ -1,13 +1,14 @@
 <template>
   <div id="article-sidebar">
     <ArticleList type="latest"></ArticleList>
-    <ArticleList type="related"></ArticleList>
+    <ArticleList type="related" :category="category"></ArticleList>
   </div>
 </template>
 
 <script>
 import ArticleList from '@/components/Article/ArticleList.vue'
 export default {
+  props: ['category'],
   components: {
     ArticleList
   }

@@ -9,7 +9,7 @@
     <Video></Video>
     <CommingSoon></CommingSoon>
     <Intro></Intro>
-    <!-- <News></News> -->
+    <News></News>
     <Map></Map>
     <Schedule></Schedule>
   </section>

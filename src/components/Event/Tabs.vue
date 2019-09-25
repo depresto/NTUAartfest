@@ -8,8 +8,6 @@
                   :to="{ name: 'events', params: { category: 'workshops' } }">工作坊</router-link>
     <router-link  :class="{ active: $route.params.category == 'lectures' }"
                   :to="{ name: 'events', params: { category: 'lectures' } }">講座</router-link>
-    <router-link  :class="{ active: $route.params.category == 'markets' }"
-                  :to="{ name: 'events', params: { category: 'markets' } }">主題市集</router-link>
   </div>
 </template>
 

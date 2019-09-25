@@ -1,18 +1,18 @@
 <template>
   <div id="event-list">
     <div class="container">
-      <div class="box" v-for="(item, index) in news_list" :key="index">
-        <div class="img-bg" :style="{ backgroundImage: 'url(' + item.img + ')' }"></div>
+      <div class="box" v-for="(item, index) in currentEvents" :key="index">
+        <div class="img-bg" :style="{ backgroundImage: 'url(' + item.bg + ')' }"></div>
 
         <div class="information">
           <div class="place">
             {{item.title}}
           </div>
           <div class="description">
-            <p>時間：{{item.time}}</p>
-            <p>地點：{{item.location}}</p>
-            <p>簡介：{{item.content}}</p>
-            <p>連結：<a :href="item.url">{{item.url}}</a></p>
+            <p>時間：{{item.start}} {{item.time}}</p>
+            <p>地點：{{item.place}}</p>
+            <p class="intro">簡介：{{item.intro}}</p>
+            <p>連結：<a :href="item.link">{{item.link}}</a></p>
           </div>
         </div>
       </div>
@@ -22,8 +22,9 @@
 
 <style lang="scss">
 #event-list {
-  padding-top: 50px;
+  padding-top: 10px;
   padding-bottom: 50px;
+  min-height: 100vh;
   .container {
     display: flex;
     flex-direction: row;
@@ -51,6 +52,8 @@
       z-index: 100;
       width: 100%;
       height: 200px;
+      background-size: cover;
+      background-position: center center;
     }
     .information {
       width: 250px;
@@ -60,7 +63,8 @@
       background-color: #DDDDDD;
       padding: 10px 20px;
       margin-top: 20px;
-      z-index: 1000;
+      z-index: 100000;
+      display: block;
 
       position: absolute;
       right: -40%;
@@ -71,14 +75,18 @@
       transition: opacity 1s;
       .place {
         font-size: 1.5em;
+        line-height: 1.8rem;
         margin: 10px 0;
         text-align: center;
       }
       .description {
         font-size: 0.9em;
-        line-height: 1.6em;
+        line-height: 1.5em;
         p {
-          margin-bottom: 5px;
+          margin-bottom: 2px;
+        }
+        .intro {
+          white-space: pre-line;
         }
       }
     }
@@ -110,73 +118,24 @@
 </style>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
-      news_list: [{
-        img: "/news/news.jpg",
-        title: "失常",
-        time: "2019/09/15",
-        location: "台灣藝術大學",
-        content: "時果似無，有可也氣排說處父一口算的接正層港難國一是廣春選國打阿適活我上是的決慢一習除公趣銷水前，面在是聞過外打大沒林半害畫",
-        url: "www.afred.com.tw"
-      },{
-        img: "/news/news.jpg",
-        title: "失常",
-        time: "2019/09/15",
-        location: "台灣藝術大學",
-        content: "時果似無，有可也氣排說處父一口算的接正層港難國一是廣春選國打阿適活我上是的決慢一習除公趣銷水前，面在是聞過外打大沒林半害畫",
-        url: "www.afred.com.tw"
-      },{
-        img: "/news/news.jpg",
-        title: "失常",
-        time: "2019/09/15",
-        location: "台灣藝術大學",
-        content: "時果似無，有可也氣排說處父一口算的接正層港難國一是廣春選國打阿適活我上是的決慢一習除公趣銷水前，面在是聞過外打大沒林半害畫",
-        url: "www.afred.com.tw"
-      },{
-        img: "/news/news.jpg",
-        title: "失常",
-        time: "2019/09/15",
-        location: "台灣藝術大學",
-        content: "時果似無，有可也氣排說處父一口算的接正層港難國一是廣春選國打阿適活我上是的決慢一習除公趣銷水前，面在是聞過外打大沒林半害畫",
-        url: "www.afred.com.tw"
-      },{
-        img: "/news/news.jpg",
-        title: "失常",
-        time: "2019/09/15",
-        location: "台灣藝術大學",
-        content: "時果似無，有可也氣排說處父一口算的接正層港難國一是廣春選國打阿適活我上是的決慢一習除公趣銷水前，面在是聞過外打大沒林半害畫",
-        url: "www.afred.com.tw"
-      },{
-        img: "/news/news.jpg",
-        title: "失常",
-        time: "2019/09/15",
-        location: "台灣藝術大學",
-        content: "時果似無，有可也氣排說處父一口算的接正層港難國一是廣春選國打阿適活我上是的決慢一習除公趣銷水前，面在是聞過外打大沒林半害畫",
-        url: "www.afred.com.tw"
-      },{
-        img: "/news/news.jpg",
-        title: "失常",
-        time: "2019/09/15",
-        location: "台灣藝術大學",
-        content: "時果似無，有可也氣排說處父一口算的接正層港難國一是廣春選國打阿適活我上是的決慢一習除公趣銷水前，面在是聞過外打大沒林半害畫",
-        url: "www.afred.com.tw"
-      },{
-        img: "/news/news.jpg",
-        title: "失常",
-        time: "2019/09/15",
-        location: "台灣藝術大學",
-        content: "時果似無，有可也氣排說處父一口算的接正層港難國一是廣春選國打阿適活我上是的決慢一習除公趣銷水前，面在是聞過外打大沒林半害畫",
-        url: "www.afred.com.tw"
-      },{
-        img: "/news/news.jpg",
-        title: "失常",
-        time: "2019/09/15",
-        location: "台灣藝術大學",
-        content: "時果似無，有可也氣排說處父一口算的接正層港難國一是廣春選國打阿適活我上是的決慢一習除公趣銷水前，面在是聞過外打大沒林半害畫",
-        url: "www.afred.com.tw"
-      }]
+      category: {
+        programs: '表演節目',
+        workshops: '工作坊',
+        lectures: '講座'
+      }
+    }
+  },
+  computed: {
+    ...mapGetters({
+      events: 'artists/getCallendarEvent'
+    }),
+    currentEvents() {
+      let vm = this;
+      return vm.events.filter(event => event.type == vm.category[vm.$route.params.category])
     }
   },
 }

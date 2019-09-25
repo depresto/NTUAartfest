@@ -6,12 +6,14 @@
     </div>
 
     <swiper :options="swiperOption" v-view>
-      <swiper-slide v-for="(item, index) in works" :key="index">
-        <div class="image" :style="{ backgroundImage: 'url(' + item.img + ')' }"></div>
-        <div class="text">
-          <h1>{{item.title}}</h1>
-          <h2>{{item.subtitle}}</h2>
-        </div>
+      <swiper-slide v-for="(item, index) in events" :key="index">
+        <router-link :to="item.fields.Link">
+          <div class="image" :style="{ backgroundImage: 'url(' + item.fields.Image + ')' }"></div>
+          <div class="text">
+            <h1>{{item.fields.Name}}</h1>
+            <h2>{{item.fields.Date}} {{item.fields.Location}}</h2>
+          </div>
+        </router-link>
       </swiper-slide>
     </swiper>
   </div>
@@ -60,6 +62,7 @@
       font-size: 17px;
       opacity: 0.7;
       margin-right: 10px;
+      padding-left: 50px;
       margin-bottom: 5px;
       color: $white;
     }
@@ -68,6 +71,7 @@
       font-size: 14px;
       opacity: 0.7;
       margin-right: 10px;
+      padding-left: 40px;
       margin-bottom: 10px;
       color: $white;
       font-weight: normal;
@@ -89,6 +93,7 @@
 </style>
 
 <script>
+import { mapState } from 'vuex'
 import 'swiper/dist/css/swiper.css'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 
@@ -97,6 +102,9 @@ export default {
     swiper,
     swiperSlide
   },
+  computed: mapState({
+    events: state => state.artists.events
+  }),
   data() {
     return {
       swiperOption: {

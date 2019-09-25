@@ -38,6 +38,8 @@ export default {
   },
   created() {
     this.$store.dispatch('artists/getArtistData');
+    this.$store.dispatch('artists/getEventData');
+    this.$store.dispatch('artists/getNewsData');
   },
   mounted() {
     var vm = this;

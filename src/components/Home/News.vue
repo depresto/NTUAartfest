@@ -5,19 +5,23 @@
       <h1>最新消息</h1>
     </div>
 
-    <div class="container">
-      <div class="box" v-for="(item, index) in news_list" :key="index">
-        <router-link :to="{ name: 'articlepage', params: { id: item.id } }">
-          <img :src="item.img" alt="">
+    <div class="container slide">
+      <swiper :options="swiperOption" v-view>
+        <swiper-slide v-for="(item, index) in news_list" :key="index">
+          <router-link :to="{ name: 'articlepage', params: { id: item.id } }">
+            <img :src="item.fields.Image" alt="">
 
-          <div class="text">
-            <h1>{{item.title}}</h1>
-            <div class="description">
-              <p>{{item.content}}</p>
+            <div class="text">
+              <h1>{{item.fields.Name}}</h1>
+              <div class="description">
+                <p>{{item.fields.Content}}</p>
+              </div>
             </div>
-          </div>
-        </router-link>
-      </div>
+          </router-link>
+        </swiper-slide>
+      </swiper>
+      <div class="swiper-button-prev swiper-button-white" slot="button-prev"></div>
+      <div class="swiper-button-next swiper-button-white" slot="button-next"></div>
     </div>
   </div>
 </template>
@@ -35,12 +39,12 @@
     width: 90%;
     max-width: 980px;
     margin: 0 auto;
+    position: relative;
   }
-  .box {
+  .box, .swiper-slide {
     z-index: 100;
 
     border: none;
-    margin: 0 30px;
     min-width: 200px;
     img {
       width: 100%;
@@ -74,37 +78,58 @@
       }
     }
   }
+  .swiper-button-prev {
+    left: -40px;
+  }
+  .swiper-button-next {
+    right: -40px;
+  }
 }
 @media screen and (max-width: 768px){
   #news {
     .container {
       flex-wrap: wrap;
     }
+    .swiper-button-prev {
+      left: 0px;
+    }
+    .swiper-button-next {
+      right: 0px;
+    }
   }
 }
 </style>
 
 <script>
+import { mapState } from 'vuex'
+import { swiper, swiperSlide } from 'vue-awesome-swiper'
 export default {
+  components: { 
+    swiper,
+    swiperSlide
+  },
   data() {
     return {
-      news_list: [{
-        id: "1",
-        img: "/news/news.jpg",
-        title: "失常",
-        content: "時果似無，有可也氣排說處父一口算的接正層港難國一是廣春選國打阿適活我上是的決慢一習除公趣銷水前，面在是聞過外打大沒林半害畫"
-      },{
-        id: "1",
-        img: "/news/news.jpg",
-        title: "失常",
-        content: "時果似無，有可也氣排說處父一口算的接正層港難國一是廣春選國打阿適活我上是的決慢一習除公趣銷水前，面在是聞過外打大沒林半害畫"
-      },{
-        id: "1",
-        img: "/news/news.jpg",
-        title: "失常",
-        content: "時果似無，有可也氣排說處父一口算的接正層港難國一是廣春選國打阿適活我上是的決慢一習除公趣銷水前，面在是聞過外打大沒林半害畫"
-      }]  
+      swiperOption: {
+        slidesPerView: 3,
+        spaceBetween: 30,
+        loop: true,
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev'
+        },
+        breakpoints: {
+          768: {
+            slidesPerView: 'auto',
+          },
+        }
+      },
     }
   },
+  computed: {
+    ...mapState({
+      news_list: state => state.artists.news_list
+    })
+  }
 }
 </script>
