@@ -15,6 +15,8 @@
           </div>
         </router-link>
       </swiper-slide>
+      <div class="swiper-button-prev swiper-button-white" slot="button-prev"></div>
+      <div class="swiper-button-next swiper-button-white" slot="button-next"></div>
     </swiper>
   </div>
 </template>
@@ -113,37 +115,16 @@ export default {
         freeMode: true,
         loop: true,
         centeredSlides: true,
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev'
+        },
         breakpoints: {
           768: {
             slidesPerView: 'auto',
           },
         }
-      },
-      works: [{
-        img: "/comming-soon/1.jpg",
-        title: "時常",
-        subtitle: "9/15(四) 台藝大體育館"
-      },{
-        img: "/comming-soon/2.jpg",
-        title: "FORZEN DANCE",
-        subtitle: "GRACE SCHWINDT"
-      },{
-        img: "/comming-soon/3.jpeg",
-        title: "FORZEN DANCE",
-        subtitle: "GRACE SCHWINDT"
-      },{
-        img: "/comming-soon/4.jpg",
-        title: "FORZEN DANCE",
-        subtitle: "GRACE SCHWINDT"
-      },{
-        img: "/comming-soon/1.jpg",
-        title: "FORZEN DANCE",
-        subtitle: "GRACE SCHWINDT"
-      },{
-        img: "/comming-soon/2.jpg",
-        title: "FORZEN DANCE",
-        subtitle: "GRACE SCHWINDT"
-      }]
+      }
     }
   }
 }

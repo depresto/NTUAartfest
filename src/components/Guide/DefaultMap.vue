@@ -3,7 +3,7 @@
     <div class="container">
       <div class="section_map">
         <img class="map" :src="map" >
-        <div @mouseover='filter = "第一學生活動中心" ' class="mark1">
+        <!-- <div @mouseover='filter = "第一學生活動中心" ' class="mark1">
           <MapMarker fill="#F39800"></MapMarker>
         </div>
 
@@ -37,7 +37,7 @@
 
         <div @mouseover='filter = "總圖"' class="mark9">
           <MapMarker  fill="#616FED"></MapMarker>
-        </div>
+        </div> -->
 
       </div>
     </div>

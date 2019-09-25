@@ -8,7 +8,7 @@
     <div class="container">
       <div class="section_map">
         <img class="map" :src="map" >
-        <div @mouseover='filter = "第一學生活動中心" ' class="mark1">
+        <!-- <div @mouseover='filter = "第一學生活動中心" ' class="mark1">
           <MapMarker fill="#F39800"></MapMarker>
         </div>
 
@@ -42,11 +42,11 @@
 
         <div @mouseover='filter = "總圖"' class="mark9">
           <MapMarker  fill="#616FED"></MapMarker>
-        </div>
+        </div> -->
 
       </div>
     </div>
-    <div class="container">
+    <!-- <div class="container">
       <div class="information">
         <div
           v-bind:style="{ color: now_area[0].color }"
@@ -58,7 +58,7 @@
           <div>{{ item.active}}</div>
         </div>
       </div>
-    </div>
+    </div> -->
   </section>
 </template>
 
