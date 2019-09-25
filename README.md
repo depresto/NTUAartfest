@@ -1,4 +1,6 @@
-# 2019-ntuaartfest
+# 2019 NTUAartfest
+
+### Official site of Nation Taiwan University of Arts Art Festival
 
 ## Project setup
 ```
