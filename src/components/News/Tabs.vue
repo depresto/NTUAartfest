@@ -13,6 +13,6 @@
 
 <style scoped lang="scss">
   .tabs a {
-    z-index: 11000;
+    z-index: 100;
   }
 </style>

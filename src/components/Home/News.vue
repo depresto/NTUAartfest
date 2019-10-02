@@ -9,7 +9,7 @@
       <swiper :options="swiperOption" v-view>
         <swiper-slide v-for="(item, index) in news_list" :key="index">
           <router-link :to="{ name: 'articlepage', params: { id: item.id } }">
-            <img :src="item.fields.Image" alt="">
+            <img :src="item.fields.Image" class="animated-background" alt="">
 
             <div class="text">
               <h1>{{item.fields.Name}}</h1>
@@ -48,6 +48,7 @@
     min-width: 200px;
     img {
       width: 100%;
+      min-height: 200px;
       transition: transform 1s;
       &:hover {
         transform: scale(1.1);
@@ -68,7 +69,7 @@
         margin-bottom: 5px;
         font-size: .9rem;
         line-height: 1.5rem;
-        p {
+        p, div {
           display: -webkit-box;
           overflow: hidden;
           text-overflow: ellipsis;

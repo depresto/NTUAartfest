@@ -11,22 +11,30 @@
           </div>
 
           <div class="feature">
-            <img :src="artist.fields.FeatureImage" alt="">
+            <img class="animated-background" :src="artist.fields.FeatureImage" alt="">
           </div>
 
-          <div class="text">{{artist.fields.Description}}</div>
+          <div class="text">
+            <div v-html="artist.fields.Description"></div>
+          </div>
 
           <img :src="artist.fields.Image1" alt="">
           <h3 class="work-title">{{artist.fields.Title1}}</h3>
-          <div class="text">{{artist.fields.Text1}}</div>
+          <div class="text">
+            <div v-html="artist.fields.Text1"></div>
+          </div>
 
           <img :src="artist.fields.Image2" v-if="artist.fields.Image2" alt="">
           <h3 class="work-title" v-if="artist.fields.Title2">{{artist.fields.Title2}}</h3>
-          <div class="text" v-if="artist.fields.Text2">{{artist.fields.Text2}}</div>
+          <div class="text" v-if="artist.fields.Text2">
+            <div v-html="artist.fields.Text2"></div>
+          </div>
 
           <img :src="artist.fields.Image3" v-if="artist.fields.Image3" alt="">
           <h3 class="work-title" v-if="artist.fields.Title3">{{artist.fields.Title3}}</h3>
-          <div class="text" v-if="artist.fields.Text3">{{artist.fields.Text3}}</div>
+          <div class="text" v-if="artist.fields.Text3">
+            <div v-html="artist.fields.Text3"></div>
+          </div>
         </div>
 
         <Sidebar :artists="artists"></Sidebar>

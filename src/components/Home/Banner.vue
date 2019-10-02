@@ -5,15 +5,15 @@
       Your browser does not support the video tag.
     </video>
     
-    <div id="banner-video-mobile"></div>
 
     <div class="container">
       <div class="title-box" v-show="textShow">
         <h1>限時動態SNAPS</h1>
         <h2>臺灣藝術大學藝術博物館</h2>
       </div>
-
     </div>
+
+    <div id="banner-video-mobile"></div>
 
     <Navbar :in_home="true"></Navbar>
   </div>

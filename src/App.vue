@@ -97,12 +97,20 @@ export default {
     canvasMouseDown: function (e) {
       var context = document.getElementById('canvas');
 
+      if (['/'].includes(this.$route.path)) {
+        return false;
+      }
+
       this.paint = true;
       this.addClick(e.clientX - context.offsetLeft, e.clientY - context.offsetTop);
       this.redraw();
     },
     canvasMouseMove: function (e) {
       var context = document.getElementById('canvas');
+
+      if (['/'].includes(this.$route.path)) {
+        return false;
+      }
 
       if (this.paint){
         this.addClick(e.clientX - context.offsetLeft, e.clientY - context.offsetTop, true);

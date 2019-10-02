@@ -7,13 +7,14 @@
 
     <swiper :options="swiperOption" v-view>
       <swiper-slide v-for="(item, index) in events" :key="index">
-        <router-link :to="item.fields.Link">
+        <a :href="item.fields.Link">
+          <div class="loading-bg animated-background"></div>
           <div class="image" :style="{ backgroundImage: 'url(' + item.fields.Image + ')' }"></div>
           <div class="text">
             <h1>{{item.fields.Name}}</h1>
             <h2>{{item.fields.Date}} {{item.fields.Location}}</h2>
           </div>
-        </router-link>
+        </a>
       </swiper-slide>
       <div class="swiper-button-prev swiper-button-white" slot="button-prev"></div>
       <div class="swiper-button-next swiper-button-white" slot="button-next"></div>
@@ -29,6 +30,14 @@
   .swiper-slide {
     position: relative;
     height: 100%;
+    .loading-bg {
+      height: 100%;
+      width: 100%;
+
+      position: absolute;
+      right: 0;
+      bottom: 0;
+    }
     img {
       width: 100%;
     }
@@ -39,6 +48,7 @@
 
       background-size: cover;
       background-position: center center;
+      position: relative;
     }
     .text {
       position: absolute;

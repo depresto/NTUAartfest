@@ -3,7 +3,7 @@
     <div class="container">
       <div class="box" v-for="(item, index) in news_list" :key="index">
         <router-link :to="{ name: 'articlepage', params: { id: item.id } }">
-          <img :src="item.fields.Image" alt="">
+          <img :src="item.fields.Image" class="animated-background" alt="">
 
           <div class="text">
             <h1>{{item.fields.Name}}</h1>
@@ -27,8 +27,9 @@
   min-height: 100vh;
   .container {
     display: flex;
+    flex-wrap: wrap;
     flex-direction: row;
-    justify-content: center;
+    justify-content: flex-start;
 
     width: 90%;
     max-width: 980px;
@@ -40,8 +41,10 @@
     border: none;
     margin: 0 30px;
     min-width: 200px;
+    width: calc(33% - 60px);
     img {
       width: 100%;
+      min-height: 100px;
       transition: transform 1s;
       &:hover {
         transform: scale(1.1);
@@ -62,12 +65,13 @@
         margin-bottom: 5px;
         font-size: .9rem;
         line-height: 1.5rem;
-        p {
+        div {
           display: -webkit-box;
           overflow: hidden;
           text-overflow: ellipsis;
           -webkit-line-clamp: 3;
           -webkit-box-orient: vertical;
+          height: 60px;
         }
       }
       .readmore {
@@ -83,6 +87,9 @@
     .container {
       flex-wrap: wrap;
       flex-direction: column;
+      .box {
+        width: auto;
+      }
     }
   }
 }
