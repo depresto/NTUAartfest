@@ -4,6 +4,7 @@
 
     <div id="concept" class="container">
       <div class="deco-bg"><h1>展演理念</h1></div>
+      <div class="sub-title"><h3>Concept</h3></div> 
 
       <div class="description">
         <h2>【限時動態 - 超領域國際展 SNAPS OMNI EXPO】</h2>
@@ -14,29 +15,35 @@
 
     <div id="crew" class="container">
       <div class="deco-bg"><h1>策展團隊</h1></div>
+      <div class="sub-title"><h3>Team</h3></div> 
 
       <div class="team">
         <div class="member" v-for="(member, index) in team" :key="index">
           <div class="member-name deco-bg"><span>{{member.fields.Name}}</span></div>
+          <div class="member-name-eng">{{member.fields.Name_Eng}}</div>
           <div class="member-description">{{member.fields.Position}}</div>
           <div class="member-img">
             <img :src="member.fields.Image" :alt="member.fields.Name">
           </div>
           <div class="member-job">{{member.fields.Title}}</div>
+          <div class="member-job-eng">{{member.fields.Title_Eng}}</div>
         </div>
       </div>
     </div>
 
     <div id="sponsor" class="container">
       <div class="deco-bg"><h1>合作單位</h1></div>
+      <div class="sub-title"><h3>Partners &amp; Sponsors</h3></div> 
 
       <div v-for="(type, index) in sponsors['types']" :key="index">
         <div class="deco-bg"><h2>{{type}}</h2></div>
+        <div class="sub-title"><h3>{{sponsors['types_eng'][index]}}</h3></div> 
 
         <div class="sponsor-list">
           <div class="sponsor" v-for="(sponsor, index) in sponsors[type]" :key="index">
             <img :src="sponsor['Image']" :alt="sponsor['Name']">
             <div class="sponsor-name">{{sponsor['Name']}}</div>
+            <div class="sub-title">{{sponsor['Name_Eng']}}</div>
           </div>
         </div>  
       </div>
@@ -104,6 +111,14 @@ export default {
   > * {
     position: relative;
   }
+  h1 {
+    margin-top: 30px!important;
+    margin-bottom: 10px!important;
+  }
+  h2 {
+    margin-top: 40px!important;
+    margin-bottom: 10px!important;
+  }
   &::before {
     content: "";
     display: block;
@@ -116,6 +131,11 @@ export default {
     background: url(/about/text_bg.png) 0 0 no-repeat;
     background-size: contain;
   }
+}
+.sub-title {
+  text-align: center;
+  position: relative;
+  margin-bottom: 10px;
 }
 .modal {
   display: flex;
@@ -202,10 +222,12 @@ export default {
         }
         .sponsor-name {
           margin-top: 5px;
+          margin-bottom: 5px;
         }
       }
     }
     .team {
+      margin-top: 40px;
       display: flex;
       justify-content: space-around;
       flex-wrap: wrap;
@@ -215,9 +237,14 @@ export default {
         width: 30%;
         margin-bottom: 40px;
         text-align: center;
+        padding: 0 45px;
         .member-name {
           font-size: 1.8rem;
           font-weight: bold;
+        }
+        .member-name-eng {
+          margin-bottom: 5px;
+          font-weight: 300;
         }
         .member-description {
           font-weight: 300;
@@ -231,6 +258,10 @@ export default {
             width: auto;
             height: 100%;
           }
+        }
+        .member-job {
+          font-size: 1.1rem;
+          margin-bottom: 5px;
         }
       }
     }

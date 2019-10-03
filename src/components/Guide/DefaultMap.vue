@@ -2,68 +2,57 @@
   <section id="default-map" class="section">
     <div class="container">
       <div class="section_map">
-        <img class="map" :src="map" >
-        <!-- <div @mouseover='filter = "第一學生活動中心" ' class="mark1">
-          <MapMarker fill="#F39800"></MapMarker>
+        <img class="map animated-background" :src="map" >
+        <div @mouseover='filter = "A" ' class="mark1">
+          <img class="mark-img" src="/map/tag_a.png" alt="">
         </div>
 
-        <div @mouseover='filter = "第二學生活動中心" ' class="mark2">
-          <MapMarker fill="#E61773"></MapMarker>
+        <div @mouseover='filter = "B" ' class="mark2">
+          <img class="mark-img" src="/map/tag_b.png" alt="">
         </div>
 
-        <div @mouseover='filter = "舊體育館"' class="mark3">
-          <MapMarker fill="#595857"></MapMarker>
+        <div @mouseover='filter = "C"' class="mark3">
+          <img class="mark-img" src="/map/tag_c.png" alt="">
         </div>
 
-        <div @mouseover='filter = "鹿鳴廣場"' class="mark4">
-          <MapMarker fill="#E60013"></MapMarker>
+        <div @mouseover='filter = "D"' class="mark4">
+          <img class="mark-img" src="/map/tag_d.png" alt="">
         </div>
 
-        <div @mouseover='filter = "博雅教學館"' class="mark5">
-          <MapMarker fill="#6A3A07"></MapMarker>
+        <div @mouseover='filter = "E"' class="mark5">
+          <img class="mark-img" src="/map/tag_e.png" alt="">>
         </div>
         
-        <div @mouseover='filter = "社科院"' class="mark6">
-          <MapMarker  fill="#601986"></MapMarker>
+        <div @mouseover='filter = "I"' class="mark6">
+          <img class="mark-img" src="/map/tag_i.png" alt="">
         </div>
 
-        <div @mouseover='filter = "陳文成紀念廣場"' class="mark7">
-          <MapMarker  fill="#CC530D"></MapMarker>
+        <div @mouseover='filter = "J"' class="mark7">
+          <img class="mark-img" src="/map/tag_j.png" alt="">
         </div>
 
-        <div @mouseover='filter = "振興草皮"' class="mark8">
-          <MapMarker  fill="#3E16FF"></MapMarker>
+        <div @mouseover='filter = "K"' class="mark8">
+          <img class="mark-img" src="/map/tag_k.png" alt="">
         </div>
-
-        <div @mouseover='filter = "總圖"' class="mark9">
-          <MapMarker  fill="#616FED"></MapMarker>
-        </div> -->
 
       </div>
     </div>
     <div class="container">
-      <div class="information">
-        <div
-          v-bind:style="{ color: now_area[0].color }"
-          class="place"
-        >
-          {{now_area[0].place}}
+      <div class="information" v-if="now_area[0]">
+        <div v-bind:style="{ color: now_area[0].fields.Color }" class="place">
+          {{now_area[0].fields.Name}}
         </div>
-        <div v-for="(item, index) in now_area[0].actives" :key="index" class="p">
-          <div>{{ item.active}}</div>
-        </div>
+
+        <div class="p">{{now_area[0].fields.Content}}</div>
       </div>
     </div>
   </section>
 </template>
 
 <script>
-import MapMarker from '@/components/Home/MapMarker';
+import { mapState } from 'vuex'
 import placeData from '@/data/placeData';
 export default {
-  components: {
-    MapMarker,
-  },
   data() {
     return {
       map: 'https://i.imgur.com/Q7c4Kao.png',
@@ -72,18 +61,25 @@ export default {
     };
   },
   computed: {
+    ...mapState({
+      place_data: state => state.artists.place_data
+    }),
     now_area() {
-      return this.place.filter(obj => obj.place === this.filter);
-    },
+      return this.place_data.filter(obj => obj.fields.Mark === this.filter);
+    }
   },
 };
 </script>
 
 <style scoped lang="scss">
+#maps {
+  .page-title {
+    padding-bottom: 20px;
+  }
+}
 .section {
   height: auto;
   width: 100%;
-  margin-bottom: 50px;
 }
 .container {
   display: flex;
@@ -95,11 +91,19 @@ export default {
   width: 600px;
   position: relative;
   height: 540px;
+  margin-top: 20px;
 }
 .map {
   width: 600px;
   position: relative;
   height: 540px;
+}
+.mark-img {
+  width: 18px;
+  transition: all .2s ease-in-out;
+  &:hover {
+    transform: scale(1.5);
+  }
 }
 .marker {
   transition: .2s;
@@ -120,7 +124,7 @@ export default {
   line-height: 1.5rem;
   text-align: left;
   background-color: #DDDDDD;
-  padding: 10px 20px;
+  padding: 20px 30px;
   margin-top: 20px;
   z-index: 1000;
 }
@@ -128,9 +132,13 @@ export default {
   font-size: 1.5em;
   margin: 10px 0;
 }
+.p {
+  white-space: pre-line;
+  margin-bottom: 10px;
+}
 </style>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .marker {
   transition: .2s;
   opacity: 0.8;
@@ -142,43 +150,43 @@ export default {
 }
 .mark1 {
   position: absolute;
-  top: 34%;
-  left: 57%;
+  top: 37.2%;
+  left: 52.9%;
 }
 .mark2 {
   position: absolute;
-  top: 60%;
-  left: 30%;
+  top: 27%;
+  left: 50.7%;
 }
 .mark3 {
   position: absolute;
-  top: 22%;
-  left: 31.5%;
+  top: 27.8%;
+  left: 55.5%;
 }
 .mark4 {
   position: absolute;
-  top: 55%;
-  left: 40%;
+  top: 27%;
+  left: 58.5%;
 }
 .mark5 {
   position: absolute;
-  top: 27%;
-  left: 36%;
+  top: 25.2%;
+  left: 61%;
 }
 .mark6 {
   position: absolute;
-  top: 17%;
-  left: 66%;
+  top: 39.2%;
+  left: 46%;
 }
 .mark7 {
   position: absolute;
-  top: 34%;
-  left: 51%;
+  top: 38.1%;
+  left: 49.8%;
 }
 .mark8 {
   position:  absolute;
-  top: 39%; 
-  left: 51%;
+  top: 82%; 
+  left: 19.5%;
 }
 .mark9 {
   position: absolute;

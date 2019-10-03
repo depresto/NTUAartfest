@@ -52,6 +52,7 @@ const state = {
       Content: ""
     }
   }],
+  place_data: []
 }
 
 // getters
@@ -124,6 +125,16 @@ const actions = {
       // eslint-disable-next-line no-console
       if (err) { console.error(err); return; }
     });
+  },
+  getPlaceData({ commit }) {
+    base('Map').select({
+      view: "Grid view"
+    }).eachPage(function page(records) {
+      commit('setMap', {map: records});
+    }, function done(err) {
+      // eslint-disable-next-line no-console
+      if (err) { console.error(err); return; }
+    });
   }
 }
 
@@ -137,6 +148,9 @@ const mutations = {
   },
   setNews(state, { news }) {
     state.news_list = news;
+  },
+  setMap(state, { map }) {
+    state.place_data = map;
   }
 }
 

@@ -51,8 +51,12 @@ const getters = {
     return state.sponsors.reduce((arr ,sponsor) => {
       if (arr[sponsor.fields.Type] == undefined) {
         arr[sponsor.fields.Type] = [];
-        if (arr['types'] == undefined) arr['types'] = [];
+        if (arr['types'] == undefined) {
+          arr['types'] = [];
+          arr['types_eng'] = [];
+        }
         arr['types'].push(sponsor.fields.Type);
+        arr['types_eng'].push(sponsor.fields.Type_Eng);
       }
       arr[sponsor.fields.Type].push(sponsor.fields);
       return arr;
