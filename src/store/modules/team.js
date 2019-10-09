@@ -42,7 +42,8 @@ const state = {
       Name: "國立臺灣藝術大學",
       Type: "主辦單位"
     }
-  }]
+  }],
+  about: []
 }
 
 // getters
@@ -61,6 +62,14 @@ const getters = {
       arr[sponsor.fields.Type].push(sponsor.fields);
       return arr;
     })
+  },
+  getAbout: state => {
+    return state.about.reduce((arr, about) => {
+      if (arr[about.fields.Type] == undefined) {
+        arr[about.fields.Type] = about.fields.Content;
+      }
+      return arr;
+    }, {})
   }
 }
 
@@ -85,6 +94,16 @@ const actions = {
       // eslint-disable-next-line no-console
       if (err) { console.error(err); return; }
     });
+  },
+  getAboutData ({ commit }) {
+    base('About').select({
+      view: "Grid view"
+    }).eachPage(function page(records) {
+      commit('setAbout', {about: records});
+    }, function done(err) {
+      // eslint-disable-next-line no-console
+      if (err) { console.error(err); return; }
+    });
   }
 }
 
@@ -95,6 +114,9 @@ const mutations = {
   },
   setSponsors(state, { sponsors }) {
     state.sponsors = sponsors;
+  },
+  setAbout(state, { about }) {
+    state.about = about;
   }
 }
 

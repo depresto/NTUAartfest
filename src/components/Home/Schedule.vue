@@ -130,7 +130,8 @@ export default {
     position: absolute;
     top: 40%;
     width: 400px;
-    height: 240px;
+    height: auto;
+    min-height: 240px;
     left: 0;
     right: 0;
     margin: 0 auto;

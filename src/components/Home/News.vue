@@ -48,7 +48,7 @@
     min-width: 200px;
     img {
       width: 100%;
-      min-height: 200px;
+      min-height: 100px;
       transition: transform 1s;
       &:hover {
         transform: scale(1.1);
@@ -75,6 +75,7 @@
           text-overflow: ellipsis;
           -webkit-line-clamp: 3;
           -webkit-box-orient: vertical;
+          height: 60px;
         }
       }
     }

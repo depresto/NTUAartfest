@@ -7,9 +7,8 @@
       <div class="sub-title"><h3>Concept</h3></div> 
 
       <div class="description">
-        <h2>【限時動態 - 超領域國際展 SNAPS OMNI EXPO】</h2>
-        <p>「大臺北藝術節」組成內容是大臺北地區領域最多元，內容最充實的藝術節。且當大家參與超領域的國際大展，展中可以看秀、聽歌、飲味、聞香等全人參與的「限時動態」國際大展；第一次觀眾全人全官能的參與於大型策展展演的每件作品中，台灣首次大型策劃展中，讓觀眾全人總體官能連覺的參與，史上第一次！</p>
-        <p>今年以「限時動態」為題的當代藝術雙年展系列，邀請國內外藝術家、藝術團隊與專業機構的傑作，也共同推呈暨時尚又文青的實驗劇場 × 創新服裝秀 × 硬邊搖滾、劇構式音樂演出與講唱會延伸座談、飲食文化講座工作坊系列活動，形構超領域的國際大展。</p>
+        <h2>{{about['ConceptTitle']}}</h2>
+        <div v-html="about['ConceptContent']"></div>
       </div>
     </div>
 
@@ -78,6 +77,7 @@ export default {
     Contactus
   },
   created() {
+    this.$store.dispatch('team/getAboutData');
     this.$store.dispatch('team/getTeamData');
     this.$store.dispatch('team/getSponsorData');
   },
@@ -99,7 +99,8 @@ export default {
       team: state => state.team.team
     }),
     ...mapGetters({
-      sponsors: 'team/getSponsors'
+      sponsors: 'team/getSponsors',
+      about: 'team/getAbout'
     })
   }
 }
@@ -161,6 +162,8 @@ export default {
     color: #fff;
   }
 }
+</style>
+<style lang="scss">
 #about {
   .container {
     margin-top: 50px;

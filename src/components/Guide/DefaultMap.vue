@@ -35,6 +35,26 @@
           <img class="mark-img" src="/map/tag_k.png" alt="">
         </div>
 
+        <div @mouseover='filter = "BUS_A"' class="mark9">
+          <img class="mark-img" src="/map/tag_bus.png" alt="">
+        </div>
+
+        <div @mouseover='filter = "BUS_B"' class="mark10">
+          <img class="mark-img" src="/map/tag_bus.png" alt="">
+        </div>
+
+        <div @mouseover='filter = "BUS_C"' class="mark11">
+          <img class="mark-img" src="/map/tag_bus.png" alt="">
+        </div>
+
+        <div @mouseover='filter = "MRT"' class="mark12">
+          <img class="mark-img" src="/map/tag_mrt.png" alt="">
+        </div>
+
+        <div @mouseover='filter = "TRAIN"' class="mark13">
+          <img class="mark-img" src="/map/tag_train.png" alt="">
+        </div>
+
       </div>
     </div>
     <div class="container">
@@ -78,6 +98,7 @@ export default {
   }
 }
 .section {
+  margin-top: 0;
   height: auto;
   width: 100%;
 }
@@ -99,7 +120,7 @@ export default {
   height: 540px;
 }
 .mark-img {
-  width: 18px;
+  width: 17px;
   transition: all .2s ease-in-out;
   &:hover {
     transform: scale(1.5);
@@ -190,10 +211,51 @@ export default {
 }
 .mark9 {
   position: absolute;
-  top: 39%;
-  left: 56%;
+  top: 21.5%;
+  left: 67%;
+}
+.mark10 {
+  position: absolute;
+  top: 37.2%;
+  left: 40%;
+}
+.mark11 {
+  position: absolute;
+  top: 84.1%; 
+  left: 34%;
+}
+.mark12 {
+  position: absolute;
+  top: 14%;
+  left: 86.3%;
+  img {
+    width: 30px;
+  }
+}
+.mark13 {
+  position:  absolute;
+  top: 67.5%; 
+  left: 5.5%;
+  img {
+    width: 20px;
+  }
 }
 @media only screen and (max-width: 768px) {
+  .mark-img {
+    width: 9px;
+  }
+  .mark12 {
+    top: 13.5%;
+    img {
+      width: 14px;
+    }
+  }
+  .mark13 {
+    top: 67%;
+    img {
+      width: 10px;
+    }
+  }
   .marker {
     transition: .2s;
     opacity: 0.8;
@@ -235,7 +297,6 @@ export default {
     width: 100%;
     position:relative;
     top: auto;
-    color: #fff;
     right: auto;
     text-align: center;
     display: block;
