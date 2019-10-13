@@ -8,14 +8,21 @@
     <div class="container">
       <img src="/h5-1.png" alt="">
 
-      <div>
-        <p>如今時代，睜開眼就能看見影像瀑布正無止盡地傾瀉，透過社群網路、串流平台，每個人都是訊息驛站，並身在奇觀現實的洪流之中，這竟是限時動態的世界？</p>
-        <p>儘管如此，體驗依然體現在身體和感知上，遭逢的物體仍被視覺符號化，以及其隱喻所滲透。我們參與新的信息向度，動態地與現象學的身體交織在一起，通過「在世存有」，創造深刻和突出的美學遭遇。</p>
-        <p>「限時動態-超領域國際展」從媒體文化著手，綜觀藝術下科技語彙、植物生態學與流行文化，邀請造形藝術領域藝術家和表演團體，探查新時代藝術機制與感知模式。</p>
-      </div>
+      <div v-html="home_data['About']"></div>
     </div>
   </div>
 </template>
+
+<script>
+import { mapGetters } from 'vuex'
+export default {
+  computed: {
+    ...mapGetters({
+      home_data: 'artists/getHome'
+    })
+  }
+}
+</script>
 
 <style lang="scss">
 #exhibition-intro {

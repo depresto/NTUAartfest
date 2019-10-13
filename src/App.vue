@@ -41,6 +41,7 @@ export default {
     this.$store.dispatch('artists/getEventData');
     this.$store.dispatch('artists/getNewsData');
     this.$store.dispatch('artists/getPlaceData');
+    this.$store.dispatch('artists/getHomeData');
   },
   mounted() {
     var vm = this;

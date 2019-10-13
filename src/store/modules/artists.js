@@ -52,7 +52,8 @@ const state = {
       Content: ""
     }
   }],
-  place_data: []
+  place_data: [],
+  home_data: []
 }
 
 // getters
@@ -91,6 +92,14 @@ const getters = {
   },
   getNewsByID: state => id => {
     return state.news_list.find(news => news.id == id);
+  },
+  getHome: state => {
+    return state.home_data.reduce((arr, home) => {
+      if (arr[home.fields.Type] == undefined) {
+        arr[home.fields.Type] = home.fields.Content;
+      }
+      return arr;
+    }, {})
   }
 }
 
@@ -135,6 +144,16 @@ const actions = {
       // eslint-disable-next-line no-console
       if (err) { console.error(err); return; }
     });
+  },
+  getHomeData({ commit }) {
+    base('Home').select({
+      view: "Grid view"
+    }).eachPage(function page(records) {
+      commit('setHome', {home: records});
+    }, function done(err) {
+      // eslint-disable-next-line no-console
+      if (err) { console.error(err); return; }
+    });
   }
 }
 
@@ -151,6 +170,9 @@ const mutations = {
   },
   setMap(state, { map }) {
     state.place_data = map;
+  },
+  setHome(state, { home }) {
+    state.home_data = home;
   }
 }
 

@@ -1,16 +1,7 @@
 <template>
   <div class="banner">
-    <video id="banner-video" autoplay loop v-on:canplay.passive="videocanplay" poster="/banner/banner.jpg">
-      <source src="/banner/banner.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
-    
-
-    <div class="container">
-      <div class="title-box" v-show="textShow">
-        <h1>限時動態SNAPS</h1>
-        <h2>臺灣藝術大學藝術博物館</h2>
-      </div>
+    <div id="banner-video">
+      <img src="/banner/banner.gif" alt="">
     </div>
 
     <div id="banner-video-mobile"></div>
@@ -47,14 +38,13 @@ export default {
 
     margin-bottom: -5px;
 
-    video {
+    #banner-video, #banner-video img {
       width: 100%;
     }
     #banner-video-mobile {
       display: none;
       width: 100%;
       height: 100%;
-      background-image: url(/banner/banner-mobile.gif);
       background-size: cover;
       background-position: center center;
     }
@@ -105,6 +95,7 @@ export default {
       display: none!important;
     }
     #banner-video-mobile {
+      background-image: url(/banner/banner-mobile.gif);
       display: block!important;
     }
   }

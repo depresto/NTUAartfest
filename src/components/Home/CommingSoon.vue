@@ -8,7 +8,6 @@
     <swiper :options="swiperOption" v-view>
       <swiper-slide v-for="(item, index) in events" :key="index">
         <a :href="item.fields.Link">
-          <div class="loading-bg animated-background"></div>
           <div class="image" :style="{ backgroundImage: 'url(' + item.fields.Image + ')' }"></div>
           <div class="text">
             <h1>{{item.fields.Name}}</h1>
@@ -46,8 +45,9 @@
       height: 0;
       padding-bottom: 100%;
 
-      background-size: cover;
+      background-size: contain;
       background-position: center center;
+      background-repeat: no-repeat;
       position: relative;
     }
     .text {
